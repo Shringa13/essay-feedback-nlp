@@ -8,5 +8,6 @@ def predict(essay_id:str) -> dict:
         predicted_data = predict_data(processed_output)
         final_output = output_data_format(predicted_data)
         return final_output
-    except ValueError as e:
-        return "Please provide input values."
+    except Exception as e:
+        print(e)
+

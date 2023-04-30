@@ -92,7 +92,6 @@ def output_data_format(df:pd.DataFrame) -> dict:
     clean_data = cleanup_text(essay_text)
     tokens_essay = clean_data.split()
     essay_text = " ".join(tokens_essay)
-
     doc = {"text": essay_text, "entities": ents}
     return doc
 
