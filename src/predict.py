@@ -12,5 +12,4 @@ def predict(essay_id:str) -> dict:
     except Exception as e:
         print(e)
  
-predict('A8445CABFECE')
 
