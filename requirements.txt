@@ -1,6 +1,6 @@
 boto3==1.26.123
 fastapi==0.95.1
-gradio==3.28.1
+gradio
 keras==2.9.0
 numpy
 pandas
