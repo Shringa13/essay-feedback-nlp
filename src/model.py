@@ -97,5 +97,6 @@ def predict_data(df:pd.DataFrame) -> pd.DataFrame:
     df = df.reset_index()
     df['predicted_prob']= list(predicted_output.argmax(1))
     df["predicted_label_class"] = df["predicted_prob"].map(label_categories)
+    df.drop(columns = ['discourse_id','discourse_text','essay_text'], inplace = True)
     print("predicted_data:",df.columns)
     return df
