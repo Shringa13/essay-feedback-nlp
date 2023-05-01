@@ -35,7 +35,7 @@ def post_predictions(essay_id:str, essay_text:str):
     # if len(essay_id) == 0:
     #     raise gr.Error("Please provide input values.")
     # else:
-    results = predict(essay_id)
+    results = predict(essay_id, model)
     return results
 
 demo = gr.Interface(post_predictions,
