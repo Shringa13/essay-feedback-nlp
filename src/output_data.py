@@ -83,6 +83,7 @@ def output_data_format(df:pd.DataFrame) -> dict:
     df_essay = add_gap_rows(df_gap_length, essay_id[0])
     print("Gap Rows: ",df_essay.shape)
     essay_text = df_gap_length['essay_text'].unique()[0]
+    print(essay_text)
     ents = []
     for i, row in df_essay.iterrows():
         ents.append({
@@ -95,6 +96,7 @@ def output_data_format(df:pd.DataFrame) -> dict:
     tokens_essay = clean_data.split()
     essay_text = " ".join(tokens_essay)
     doc = {"text": essay_text, "entities": ents}
+    print(doc)
     return doc
 
 
