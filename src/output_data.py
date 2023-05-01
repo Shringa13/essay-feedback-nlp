@@ -90,9 +90,9 @@ def output_data_format(df:pd.DataFrame) -> dict:
                     })
 
 #     clean_data = cleanup_text(essay_text)
-    tokens_essay = clean_data.split()
-    essay_text = " ".join(tokens_essay)
-    doc = {"text": essay_text, "entities": ents}
+    tokens_essay = essay_text.split()
+    full_essay = " ".join(tokens_essay)
+    doc = {"text": full_essay, "entities": ents}
     return doc
 
 
