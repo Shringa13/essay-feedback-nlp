@@ -90,9 +90,8 @@ def data_preprocessing(test_data:pd.DataFrame) -> pd.DataFrame:
     # df.drop(columns =['essay_text','processed_essay'], inplace = True)
     return test_data
 
-def predict_data(df:pd.DataFrame) -> pd.DataFrame:
-    model = get_model()
-    model.compile() 
+def predict_data(df:pd.DataFrame, model) -> pd.DataFrame:
+
     predicted_output = model.predict(df['processed_discourse'], verbose=1)
     df = df.reset_index()
     df['predicted_prob']= list(predicted_output.argmax(1))
