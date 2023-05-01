@@ -78,8 +78,10 @@ def add_gap_rows(df: pd.DataFrame, essay_id: str) -> pd.DataFrame:
 
 def output_data_format(df:pd.DataFrame) -> dict:
     df_gap_length = calculate_gap_len(df)
+    print("essay gap length: ",df_gap_length.shape)
     essay_id = df_gap_length['essay_id'].unique()
     df_essay = add_gap_rows(df_gap_length, essay_id[0])
+    print("Gap Rows: ",df_essay.shape)
     essay_text = df_gap_length['essay_text'].unique()[0]
     ents = []
     for i, row in df_essay.iterrows():
