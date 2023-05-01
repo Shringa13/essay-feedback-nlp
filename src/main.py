@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from predict import predict
+from model import get_model
 import gradio as gr
 import logging 
 
@@ -8,6 +9,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+model = get_model()
+model.compile()
 
 class Request(BaseModel):
     essay_id: str
@@ -19,7 +22,7 @@ class Result(Request):
 @app.post("/predict", status_code=200)
 async def predict_api(request: Request):
     try:
-        result = predict(request.essay_id)
+        result = predict(request.essay_id, model)
     except ValueError as e:
         return HTTPException(status_code=422, detail="Please provide input.")
     
