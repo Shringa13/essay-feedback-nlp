@@ -6,6 +6,7 @@ def predict(essay_id:str) -> dict:
     try:
         processed_output = read_data(essay_id)
         predicted_data = predict_data(processed_output)
+        print(predicted_data)
         final_output = output_data_format(predicted_data)
         return final_output
     except Exception as e:
