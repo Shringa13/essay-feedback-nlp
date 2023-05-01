@@ -56,6 +56,7 @@ def read_data(essay_id: str) -> pd.DataFrame:
     essay_data.columns = ["essay_id", "essay_text"]
     df = pd.merge(df,essay_data,left_on = 'essay_id', right_on ='essay_id', how ='left')
     requested_df = df[df.essay_id == essay_id]
+    print("S3 data read:",requested_df)
     processed_data = data_preprocessing(requested_df)
     return processed_data
  
@@ -94,4 +95,5 @@ def predict_data(df:pd.DataFrame) -> pd.DataFrame:
     df = df.reset_index()
     df['predicted_prob']= list(predicted_output.argmax(1))
     df["predicted_label_class"] = df["predicted_prob"].map(label_categories)
+    print("predicted_data:",df.shape)
     return df
