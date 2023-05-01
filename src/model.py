@@ -58,7 +58,7 @@ def read_data(essay_id: str) -> pd.DataFrame:
     essay_data.columns = ["essay_id", "essay_text"]
     df = pd.merge(df,essay_data,left_on = 'essay_id', right_on ='essay_id', how ='left')
     requested_df = df[df.essay_id == essay_id]
-    print("S3 data read:",requested_df)
+#     print("S3 data read:",requested_df)
     processed_data = data_preprocessing(requested_df)
     return processed_data
  
