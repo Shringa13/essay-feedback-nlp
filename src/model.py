@@ -4,6 +4,8 @@ from keras import models
 import tensorflow_hub as hub
 import boto3
 import re
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 client = boto3.client('s3')
 bucket_name = 'essayfeedback'
