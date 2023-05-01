@@ -97,5 +97,5 @@ def predict_data(df:pd.DataFrame) -> pd.DataFrame:
     df = df.reset_index()
     df['predicted_prob']= list(predicted_output.argmax(1))
     df["predicted_label_class"] = df["predicted_prob"].map(label_categories)
-    print("predicted_data:",df.shape)
+    print("predicted_data:",df.columns)
     return df
