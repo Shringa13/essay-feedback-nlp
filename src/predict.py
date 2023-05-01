@@ -13,3 +13,4 @@ def predict(essay_id:str, model) -> dict:
         print(e)
  
 
+predict('A8445CABFECE')
