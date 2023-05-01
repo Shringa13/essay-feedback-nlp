@@ -10,4 +10,6 @@ def predict(essay_id:str) -> dict:
         return final_output
     except Exception as e:
         print(e)
+ 
+predict('A8445CABFECE')
 
