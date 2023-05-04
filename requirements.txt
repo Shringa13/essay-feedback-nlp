@@ -1,7 +1,7 @@
 boto3==1.26.123
 fastapi==0.95.1
 gradio==3.28.1
-keras==2.9.0
+keras
 numpy==1.23.5
 pandas==1.5.3
 pydantic==1.10.7
