@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from model import cleanup_text
+from text_preprocessing import resolve_encodings_and_normalize, cleanup_text
 
 
 
@@ -13,29 +13,29 @@ def calculate_gap_len(df:pd.DataFrame) -> pd.DataFrame:
     #loop over rest
     for i in range(1, len(df)):
         #gap if difference is not 1 within an essay
-        if ((df.loc[i, "essay_id"] == df.loc[i-1, "essay_id"])\
+        if ((df.loc[i, "id"] == df.loc[i-1, "id"])\
             and (df.loc[i, "discourse_start"] - df.loc[i-1, "discourse_end"] > 1)):
             df.loc[i, 'gap_length'] = df.loc[i, "discourse_start"] - df.loc[i-1, "discourse_end"] - 2
             #minus 2 as the previous end is always -1 and the previous start always +1
         #gap if the first discourse of an new essay does not start at 0
-        elif ((df.loc[i, "essay_id"] != df.loc[i-1, "essay_id"])\
+        elif ((df.loc[i, "id"] != df.loc[i-1, "id"])\
             and (df.loc[i, "discourse_start"] != 0)):
             df.loc[i, 'gap_length'] = df.loc[i, "discourse_start"] -1
 
 
     #is there any text after the last discourse of an essay?
-    last_ones = df.drop_duplicates(subset="essay_id", keep='last')
+    last_ones = df.drop_duplicates(subset="id", keep='last')
     last_ones['gap_end_length'] = np.where((last_ones.discourse_end < last_ones.essay_len),\
                                         (last_ones.essay_len - last_ones.discourse_end),\
                                         np.nan)
 
-    cols_to_merge = ['essay_id', 'gap_end_length']
-    test_data_w_gap_len = df.merge(last_ones[cols_to_merge], on = ["essay_id"], how = "left")
+    cols_to_merge = ['id', 'gap_end_length']
+    test_data_w_gap_len = df.merge(last_ones[cols_to_merge], on = ["id"], how = "left")
     return test_data_w_gap_len
 
 def add_gap_rows(df: pd.DataFrame, essay_id: str) -> pd.DataFrame:
     cols_to_keep = ['discourse_start', 'discourse_end', 'discourse_type', 'gap_length', 'gap_end_length','predicted_label_class']
-    df_essay = df[df.essay_id == essay_id][cols_to_keep].reset_index(drop = True)
+    df_essay = df[df.id == essay_id][cols_to_keep].reset_index(drop = True)
     #index new row
     insert_row = len(df_essay)
    
@@ -76,11 +76,11 @@ def add_gap_rows(df: pd.DataFrame, essay_id: str) -> pd.DataFrame:
     return df_essay
 
 
-def output_data_format(df:pd.DataFrame) -> dict:
+def output_data_format(df:pd.DataFrame, essay_text: str) -> dict:
+    print("Generating output format...")
     df_gap_length = calculate_gap_len(df)
-    essay_id = df_gap_length['essay_id'].unique()
+    essay_id = df_gap_length['id'].unique()
     df_essay = add_gap_rows(df_gap_length, essay_id[0])
-    essay_text = df_gap_length['processed_essay'].unique()[0]
     ents = []
     for i, row in df_essay.iterrows():
         ents.append({
@@ -89,8 +89,9 @@ def output_data_format(df:pd.DataFrame) -> dict:
                          'end': int(row['discourse_end']), 
                     })
 
-#     clean_data = cleanup_text(essay_text)
-    tokens_essay = essay_text.split()
+    normalized_essay = resolve_encodings_and_normalize(essay_text)
+    clean_essay = cleanup_text(normalized_essay)
+    tokens_essay = clean_essay.split()
     full_essay = " ".join(tokens_essay)
     doc = {"text": full_essay, "entities": ents}
     return doc

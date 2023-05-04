@@ -1,16 +1,18 @@
 import pandas as pd
-from model import read_data,predict_data
+from ner_model import get_preds_inference
+from classifier import get_classifications
 from output_data import output_data_format
+import logging 
 
-def predict(essay_id:str, model) -> dict:
+logger = logging.getLogger(__name__)
+def predict(essay_text:str,tokenizer, ner_model, clf_model) -> dict:
     try:
-        processed_output = read_data(essay_id)
-        predicted_data = predict_data(processed_output, model)
-#         print(predicted_data)
-        final_output = output_data_format(predicted_data)
+        ner_output = get_preds_inference(txt=essay_text, id='001', tokenizer=tokenizer, model=ner_model)
+        predicted_data = get_classifications(df=ner_output, essay_text=essay_text, model=clf_model)
+        final_output = output_data_format(predicted_data, essay_text)
+        logger.info(final_output)
         return final_output
     except Exception as e:
-        print(e)
- 
+        logger.info(e)
 
-predict('A8445CABFECE')
+
