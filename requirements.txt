@@ -1,8 +1,11 @@
 boto3==1.26.123
 fastapi==0.95.1
-gradio
-keras
-numpy
-pandas
+gradio==3.28.1
+keras==2.9.0
+numpy==1.23.5
+pandas==1.5.3
 pydantic==1.10.7
 tensorflow_hub==0.13.0
+tensorflow_macos==2.9.2
+text_unidecode==1.3
+transformers==4.28.1
