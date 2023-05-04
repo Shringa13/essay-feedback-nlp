@@ -1,3 +1,3 @@
-<img src="relative/path/in/repository/to/image.svg" width="128"/>
+<img src="/data/fourthbrain.png" width="128"/>
 
 # Essay Writing Feedback
