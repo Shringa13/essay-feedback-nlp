@@ -50,6 +50,6 @@ python main.py
 4. You start also playaround with the service through below link
 
 ```
-http://0.0.0.0:8000\ui
+http://0.0.0.0:8000/ui
 ```
 <img align = center src="/data/gradio output.png" width=100% height=100%/>
