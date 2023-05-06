@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from predict import predict
-from utils import ner_tokenizer, get_model, get_models_files
+from utils import ner_tokenizer, get_model, get_models_files, send_metric
 from examples import example_1, example_2
 import gradio as gr
 import logging 
@@ -55,6 +55,7 @@ def post_predictions(essay_text:str):
     # if len(essay_id) == 0:
     #     raise gr.Error("Please provide input values.")
     # else:
+    send_metric("predict_event", 1)
     results = predict(essay_text, tokenizer, ner_model, clf_model)
     return results
 

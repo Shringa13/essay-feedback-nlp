@@ -74,3 +74,16 @@ def get_models_files(s3_path):
         return obj_path
     except Exception as error:
         logger.error(f" Error occured :::{str(error)}")
+
+def send_metric(metric_name, metric_value ):
+    client = boto3.client('cloudwatch')
+    client.put_metric_data(
+    Namespace='Essay Feedback',
+    MetricData=[
+        {
+            'MetricName': metric_name,
+            'Value': metric_value,
+            'Unit': 'Count'
+        },
+    ]
+)
