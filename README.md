@@ -47,7 +47,7 @@ pip install -r requirement.txt
 cd src
 python main.py
 ```
-4. You start also playaround with the service through below link
+4. You can also start playaround with the service through below link
 
 ```
 http://0.0.0.0:8000/ui
