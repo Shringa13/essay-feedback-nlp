@@ -4,6 +4,11 @@
 
 Georgia State University and the Learning Agency Lab are hosted a Kaggle Competition aimed at improving the persuasive writing skills of students. The current education system has not given enough importance to this aspect, which may hinder the students' development of critical thinking. The competition's goal is to create automated essay writing feedback tool.
 
+Architecture
+<img align = center src="/images/architecture.png" width=100% height=100%/>
+
+
+UI Demo
 <img align = center src="/data/gradio output.png" width=100% height=100%/>
 
 ## Objective 
@@ -54,4 +59,8 @@ python main.py
 ```
 http://0.0.0.0:8000/ui
 ```
+
+Monitoring Cloudwatch Events
+<img align = center src="/images/metrics-monitoring.png" width=100% height=100%/>
+
 
