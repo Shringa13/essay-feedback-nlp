@@ -4,6 +4,8 @@
 
 Georgia State University and the Learning Agency Lab are hosted a Kaggle Competition aimed at improving the persuasive writing skills of students. The current education system has not given enough importance to this aspect, which may hinder the students' development of critical thinking. The competition's goal is to create automated essay writing feedback tool.
 
+<img align = center src="/data/gradio output.png" width=100% height=100%/>
+
 ## Objective 
 
 * Build a classifier model to classify argumentative elements in student writing as “effective”, “adequate” or “ineffective”.
@@ -52,4 +54,4 @@ python main.py
 ```
 http://0.0.0.0:8000/ui
 ```
-<img align = center src="/data/gradio output.png" width=100% height=100%/>
+
